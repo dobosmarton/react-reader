@@ -96,8 +96,10 @@ class EpubView extends Component {
   }
 
   handleKeyPress = ({ key }) => {
-    key && key === "ArrowRight" && this.nextPage();
-    key && key === "ArrowLeft" && this.prevPage();
+    if (this.props.enableKeyEvent) {
+      key && key === "ArrowRight" && this.nextPage();
+      key && key === "ArrowLeft" && this.prevPage();
+    }
   };
 
   render() {
@@ -115,6 +117,7 @@ EpubView.defaultProps = {
   loadingView: null,
   locationChanged: null,
   tocChanged: null,
+  enableKeyEvent: true,
   styles: defaultStyles,
   epubOptions: {}
 };
@@ -130,7 +133,8 @@ EpubView.propTypes = {
   tocChanged: PropTypes.func,
   styles: PropTypes.object,
   epubOptions: PropTypes.object,
-  getRendition: PropTypes.func
+  getRendition: PropTypes.func,
+  enableKeyEvent: PropTypes.bool
 };
 
 export default EpubView;
